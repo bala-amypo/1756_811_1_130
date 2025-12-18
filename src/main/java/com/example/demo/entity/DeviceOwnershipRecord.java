@@ -43,7 +43,7 @@ public class DeviceOwnershipRecord{
         return this.name;
     }
 
-    public void setName(String ownerNamr){
+    public void setName(String ownerName){
         this.ownerName = ownerName;
     }
 
