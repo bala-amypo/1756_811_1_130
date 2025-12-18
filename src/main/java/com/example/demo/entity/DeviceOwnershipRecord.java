@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 public class DeviceOwnershipRecord{
 
     @Id
@@ -34,7 +42,7 @@ public class DeviceOwnershipRecord{
     }
 
     public void setName(String ownerNamr){
-        this.ownerName = ownerNamer;
+        this.ownerName = ownerName;
     }
 
     public String getName(){
@@ -49,7 +57,27 @@ public class DeviceOwnershipRecord{
         return this.ownerEmail;
     }
 
-    
+    public void setName(LocalDate purchaseDate){
+        this.purchaseDate = purchaseDate;
+    }
 
-    
+    public LocalDate getName(){
+        return this.purchaseDate;
+    }
+
+    public void setName(LocalDate warrantyExpiration){
+        this.warrantyExpiration = warrantyExpiration;
+    }
+
+    public LocalDate getName(){
+        return this.warrantyExpiration;
+    }
+
+    public void setName(Bool active){
+        this.active = active;
+    }
+
+    public Bool getName(){
+        return this.active;
+    }
 }
