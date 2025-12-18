@@ -12,12 +12,25 @@ public class DeviceOwnershipRecord{
     private Bool active;
 
     public DeviceOwnershipRecord(String serialNumber, String ownerName, String ownerEmail, LocalDate purchaseDate, LocalDate warrantyExpiration, Bool active ){
+        this.id = id;
         this.serialNumber = serialNumber;
         this.ownerName = ownerName;
         this.ownerEmail = ownerEmail;
         this.purchaseDate = purchaseDate;
         this.warrantyExpiration  = warrantyExpiration;
-        this.
+        this.active = active;
+    }
+
+    public DeviceOwnershipRecord(){
+
+    }
+
+    public void setName(String serialNumber){
+        this.serialNumber = serialNumber;
+    }
+
+    public String getName(){
+        return th
     }
     
 }
