@@ -30,7 +30,26 @@ public class DeviceOwnershipRecord{
     }
 
     public String getName(){
-        return th
+        return this.name;
     }
+
+    public void setName(String ownerNamr){
+        this.ownerName = ownerNamer;
+    }
+
+    public String getName(){
+        return this.ownerNamer;
+    }
+
+    public void setName(String ownerEmail){
+        this.ownerEmail = ownerEmail;
+    }
+
+    public String getName(){
+        return this.ownerEmail;
+    }
+
+    
+
     
 }
