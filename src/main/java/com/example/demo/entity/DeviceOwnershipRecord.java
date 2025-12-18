@@ -11,6 +11,13 @@ public class DeviceOwnershipRecord{
     private LocalDate warrantyExpiration;
     private Bool active;
 
-    public 
+    public DeviceOwnershipRecord(String serialNumber, String ownerName, String ownerEmail, LocalDate purchaseDate, LocalDate warrantyExpiration, Bool active ){
+        this.serialNumber = serialNumber;
+        this.ownerName = ownerName;
+        this.ownerEmail = ownerEmail;
+        this.purchaseDate = purchaseDate;
+        this.warrantyExpiration  = warrantyExpiration;
+        this.
+    }
     
 }
