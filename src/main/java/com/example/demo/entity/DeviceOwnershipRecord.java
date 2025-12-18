@@ -35,51 +35,51 @@ public class DeviceOwnershipRecord{
 
     }
 
-    public void setName(String serialNumber){
+    public void setSerialNumber(String serialNumber){
         this.serialNumber = serialNumber;
     }
 
-    public String getName(){
-        return this.name;
+    public String getSerialNumber(){
+        return this.serialNumber;
     }
 
-    public void setName(String ownerName){
+    public void setOwnerName(String ownerName){
         this.ownerName = ownerName;
     }
 
-    public String getName(){
+    public String getOwnerName(){
         return this.ownerNamer;
     }
 
-    public void setName(String ownerEmail){
+    public void setOwnerEmail(String ownerEmail){
         this.ownerEmail = ownerEmail;
     }
 
-    public String getName(){
+    public String getOwnerEmail(){
         return this.ownerEmail;
     }
 
-    public void setName(LocalDate purchaseDate){
+    public void setPurchaseDate(LocalDate purchaseDate){
         this.purchaseDate = purchaseDate;
     }
 
-    public LocalDate getName(){
+    public LocalDate getPurchaseDate(){
         return this.purchaseDate;
     }
 
-    public void setName(LocalDate warrantyExpiration){
+    public void setWarrantyExpiration(LocalDate warrantyExpiration){
         this.warrantyExpiration = warrantyExpiration;
     }
 
-    public LocalDate getName(){
+    public LocalDate getWarrantyExpiration(){
         return this.warrantyExpiration;
     }
 
-    public void setName(Bool active){
+    public void setActive(Bool active){
         this.active = active;
     }
 
-    public Bool getName(){
+    public Bool getActive(){
         return this.active;
     }
 }
