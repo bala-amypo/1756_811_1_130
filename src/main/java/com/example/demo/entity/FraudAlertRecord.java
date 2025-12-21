@@ -14,18 +14,16 @@ public class FraudAlertRecord {
     private Long claimId;
     private String serialNumber;
     private String alertType;
-    private String severity;   // LOW / MEDIUM / HIGH / CRITICAL
+    private String severity;
     private String message;
 
     private Boolean resolved = false;
     private LocalDateTime alertDate;
 
-    // MANY ALERTS → ONE CLAIM
     @ManyToOne
     @JoinColumn(name = "claim_id_fk")
     private WarrantyClaimRecord claim;
 
-    // MANY ALERTS → ONE USER
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -43,5 +41,17 @@ public class FraudAlertRecord {
         this.alertDate = LocalDateTime.now();
     }
 
-    // getters and setters
+    // ---------- GETTERS & SETTERS (VERY IMPORTANT) ----------
+
+    public Long getId() {
+        return id;
+    }
+
+    public Boolean getResolved() {
+        return resolved;
+    }
+
+    public void setResolved(Boolean resolved) {
+        this.resolved = resolved;
+    }
 }
