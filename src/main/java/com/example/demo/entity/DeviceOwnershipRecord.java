@@ -113,8 +113,13 @@ public class DeviceOwnershipRecord {
     }
 
     public Boolean getActive() {
-        return active;
-    }
+    return active;
+}
+
+public void setActive(Boolean active) {
+    this.active = active;
+}
+
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
