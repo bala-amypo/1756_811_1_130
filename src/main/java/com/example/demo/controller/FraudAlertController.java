@@ -1,54 +1,71 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import com.example.demo.model.FraudAlertRecord;
-// import com.example.demo.service.FraudAlertService;
-// import org.springframework.web.bind.annotation.*;
+import com.example.demo.entity.FraudAlertRecord;
+import com.example.demo.service.FraudAlertService;
+import com.example.demo.service.WarrantyClaimService;
+import org.springframework.web.bind.annotation.*;
 
-// import java.util.List;
+import java.util.List;
 
-// @RestController
-// @RequestMapping("/api/fraud-alerts")
-// public class FraudAlertController {
+@RestController
+@RequestMapping("/api/fraud-alerts")
+public class FraudAlertController {
 
-//     private final FraudAlertService service;
+    private final FraudAlertService fraudAlertService;
+    private final WarrantyClaimService warrantyClaimService;
 
-//     public FraudAlertController(FraudAlertService service) {
-//         this.service = service;
-//     }
+    public FraudAlertController(
+            FraudAlertService fraudAlertService,
+            WarrantyClaimService warrantyClaimService
+    ) {
+        this.fraudAlertService = fraudAlertService;
+        this.warrantyClaimService = warrantyClaimService;
+    }
 
-//     // POST /api/fraud-alerts
-//     @PostMapping
-//     public FraudAlertRecord create(@RequestBody FraudAlertRecord alert) {
-//         return service.save(alert);
-//     }
+    // 🔒 ADMIN (security later)
+    @PostMapping
+    public FraudAlertRecord createAlert(@RequestBody FraudAlertRecord alert) {
 
-//     // GET /api/fraud-alerts
-//     @GetMapping
-//     public List<FraudAlertRecord> getAll() {
-//         return service.getAll();
-//     }
+        // Validate claim exists and attach it
+        alert.setClaim(
+                warrantyClaimService.getClaimById(alert.getClaimId())
+                        .orElseThrow(() -> new RuntimeException("Claim not found"))
+        );
 
-//     // GET /api/fraud-alerts/{id}
-//     @GetMapping("/{id}")
-//     public FraudAlertRecord getById(@PathVariable Long id) {
-//         return service.getById(id);
-//     }
+        return fraudAlertService.createAlert(alert);
+    }
 
-//     // GET /api/fraud-alerts/serial/{serialNumber}
-//     @GetMapping("/serial/{serialNumber}")
-//     public List<FraudAlertRecord> getBySerial(@PathVariable String serialNumber) {
-//         return service.getBySerial(serialNumber);
-//     }
+    @GetMapping
+    public List<FraudAlertRecord> getAllAlerts() {
+        return fraudAlertService.getAllAlerts();
+    }
 
-//     // GET /api/fraud-alerts/claim/{claimId}
-//     @GetMapping("/claim/{claimId}")
-//     public List<FraudAlertRecord> getByClaim(@PathVariable Long claimId) {
-//         return service.getByClaim(claimId);
-//     }
+    @GetMapping("/{id}")
+    public FraudAlertRecord getAlertById(@PathVariable Long id) {
+        return fraudAlertService.getAllAlerts()
+                .stream()
+                .filter(alert -> alert.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Alert not found"));
+    }
 
-//     // PUT /api/fraud-alerts/{id}/resolve
-//     @PutMapping("/{id}/resolve")
-//     public FraudAlertRecord resolve(@PathVariable Long id) {
-//         return service.resolve(id);
-//     }
-// }
+    @GetMapping("/serial/{serialNumber}")
+    public List<FraudAlertRecord> getAlertsBySerial(
+            @PathVariable String serialNumber
+    ) {
+        return fraudAlertService.getAlertsBySerial(serialNumber);
+    }
+
+    @GetMapping("/claim/{claimId}")
+    public List<FraudAlertRecord> getAlertsByClaim(
+            @PathVariable Long claimId
+    ) {
+        return fraudAlertService.getAlertsByClaim(claimId);
+    }
+
+    // 🔒 ADMIN
+    @PutMapping("/{id}/resolve")
+    public FraudAlertRecord resolveAlert(@PathVariable Long id) {
+        return fraudAlertService.resolveAlert(id);
+    }
+}
