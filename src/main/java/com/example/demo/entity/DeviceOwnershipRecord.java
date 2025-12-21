@@ -1,43 +1,74 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "device_ownership_records")
+@Table(
+    name = "device_ownership_records",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = "serialNumber")
+    }
+)
 public class DeviceOwnershipRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String serialNumber;
 
+    @Column(nullable = false)
     private String ownerName;
+
     private String ownerEmail;
+
     private LocalDate purchaseDate;
+
+    @Column(nullable = false)
     private LocalDate warrantyExpiration;
 
-    private Boolean active = true;
+    private Boolean active;
+
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "device")
-    private List<WarrantyClaimRecord> claims;
+    public DeviceOwnershipRecord() {
+    }
 
-    @OneToMany(mappedBy = "device")
-    private List<StolenDeviceReport> stolenReports;
+    public DeviceOwnershipRecord(
+            String serialNumber,
+            String ownerName,
+            String ownerEmail,
+            LocalDate purchaseDate,
+            LocalDate warrantyExpiration) {
 
-    public DeviceOwnershipRecord() {}
+        this.serialNumber = serialNumber;
+        this.ownerName = ownerName;
+        this.ownerEmail = ownerEmail;
+        this.purchaseDate = purchaseDate;
+        this.warrantyExpiration = warrantyExpiration;
+    }
 
+    // Auto-set fields (PDF rule)
     @PrePersist
     public void onCreate() {
         this.createdAt = LocalDateTime.now();
+        if (this.active == null) {
+            this.active = true;
+        }
     }
 
-    // ===== REQUIRED GETTERS / SETTERS =====
+    // ===== GETTERS & SETTERS =====
 
     public Long getId() {
         return id;
@@ -51,18 +82,47 @@ public class DeviceOwnershipRecord {
         this.serialNumber = serialNumber;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getOwnerName() {
+        return ownerName;
     }
 
-    // getter for active
-public Boolean getActive() {
-    return active;
-}
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
 
-// setter for active
-public void setActive(Boolean active) {
-    this.active = active;
-}
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
 
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
+
+    public LocalDate getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(LocalDate purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
+
+    public LocalDate getWarrantyExpiration() {
+        return warrantyExpiration;
+    }
+
+    public void setWarrantyExpiration(LocalDate warrantyExpiration) {
+        this.warrantyExpiration = warrantyExpiration;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 }
