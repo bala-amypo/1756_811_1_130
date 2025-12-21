@@ -1,99 +1,99 @@
-package com.example.demo.entity;
+// package com.example.demo.entity;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
+// import jakarta.persistence.*;
+// import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "stolen_device_reports")
-public class StolenDeviceReport {
+// @Entity
+// @Table(name = "stolen_device_reports")
+// public class StolenDeviceReport {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String serialNumber;
+//     @Column(nullable = false, unique = true)
+//     private String serialNumber;
 
-    @Column(nullable = false)
-    private String reportedBy;
+//     @Column(nullable = false)
+//     private String reportedBy;
 
-    private String details;
+//     private String details;
 
-    @Column(name = "report_date", updatable = false)
-    private LocalDateTime reportDate;
+//     @Column(name = "report_date", updatable = false)
+//     private LocalDateTime reportDate;
 
-    /* ================= RELATIONSHIP ================= */
+//     /* ================= RELATIONSHIP ================= */
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "device_id", nullable = false)
-    private DeviceOwnershipRecord device;
+//     @ManyToOne(fetch = FetchType.LAZY)
+//     @JoinColumn(name = "device_id", nullable = false)
+//     private DeviceOwnershipRecord device;
 
-    /* ================= CONSTRUCTORS ================= */
+//     /* ================= CONSTRUCTORS ================= */
 
-    public StolenDeviceReport() {
-    }
+//     public StolenDeviceReport() {
+//     }
 
-    public StolenDeviceReport(String serialNumber, String reportedBy, String details) {
-        this.serialNumber = serialNumber;
-        this.reportedBy = reportedBy;
-        this.details = details;
-    }
+//     public StolenDeviceReport(String serialNumber, String reportedBy, String details) {
+//         this.serialNumber = serialNumber;
+//         this.reportedBy = reportedBy;
+//         this.details = details;
+//     }
 
-    /* ================= LIFECYCLE ================= */
+//     /* ================= LIFECYCLE ================= */
 
-    @PrePersist
-    protected void onCreate() {
-        this.reportDate = LocalDateTime.now();
-    }
+//     @PrePersist
+//     protected void onCreate() {
+//         this.reportDate = LocalDateTime.now();
+//     }
 
-    /* ================= GETTERS & SETTERS ================= */
+//     /* ================= GETTERS & SETTERS ================= */
 
-    public Long getId() {
-        return id;
-    }
+//     public Long getId() {
+//         return id;
+//     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+//     public void setId(Long id) {
+//         this.id = id;
+//     }
 
-    public String getSerialNumber() {
-        return serialNumber;
-    }
+//     public String getSerialNumber() {
+//         return serialNumber;
+//     }
 
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
-    }
+//     public void setSerialNumber(String serialNumber) {
+//         this.serialNumber = serialNumber;
+//     }
 
-    public String getReportedBy() {
-        return reportedBy;
-    }
+//     public String getReportedBy() {
+//         return reportedBy;
+//     }
 
-    public void setReportedBy(String reportedBy) {
-        this.reportedBy = reportedBy;
-    }
+//     public void setReportedBy(String reportedBy) {
+//         this.reportedBy = reportedBy;
+//     }
 
-    public String getDetails() {
-        return details;
-    }
+//     public String getDetails() {
+//         return details;
+//     }
 
-    public void setDetails(String details) {
-        this.details = details;
-    }
+//     public void setDetails(String details) {
+//         this.details = details;
+//     }
 
-    public LocalDateTime getReportDate() {
-        return reportDate;
-    }
+//     public LocalDateTime getReportDate() {
+//         return reportDate;
+//     }
 
-    // ✅ THIS SETTER WAS MISSING
-    public void setReportDate(LocalDateTime reportDate) {
-        this.reportDate = reportDate;
-    }
+//     // ✅ THIS SETTER WAS MISSING
+//     public void setReportDate(LocalDateTime reportDate) {
+//         this.reportDate = reportDate;
+//     }
 
-    public DeviceOwnershipRecord getDevice() {
-        return device;
-    }
+//     public DeviceOwnershipRecord getDevice() {
+//         return device;
+//     }
 
-    public void setDevice(DeviceOwnershipRecord device) {
-        this.device = device;
-    }
-}
+//     public void setDevice(DeviceOwnershipRecord device) {
+//         this.device = device;
+//     }
+// }

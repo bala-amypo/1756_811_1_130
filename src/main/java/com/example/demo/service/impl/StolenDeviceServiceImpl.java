@@ -1,55 +1,55 @@
-package com.example.demo.service.impl;
+// package com.example.demo.service.impl;
 
-import com.example.demo.entity.DeviceOwnershipRecord;
-import com.example.demo.entity.StolenDeviceReport;
-import com.example.demo.repository.DeviceOwnershipRecordRepository;
-import com.example.demo.repository.StolenDeviceReportRepository;
-import com.example.demo.service.StolenDeviceService;
-import org.springframework.stereotype.Service;
+// import com.example.demo.entity.DeviceOwnershipRecord;
+// import com.example.demo.entity.StolenDeviceReport;
+// import com.example.demo.repository.DeviceOwnershipRecordRepository;
+// import com.example.demo.repository.StolenDeviceReportRepository;
+// import com.example.demo.service.StolenDeviceService;
+// import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+// import java.util.List;
+// import java.util.NoSuchElementException;
+// import java.util.Optional;
 
-@Service
-public class StolenDeviceServiceImpl implements StolenDeviceService {
+// @Service
+// public class StolenDeviceServiceImpl implements StolenDeviceService {
 
-    private final StolenDeviceReportRepository stolenRepository;
-    private final DeviceOwnershipRecordRepository deviceRepository;
+//     private final StolenDeviceReportRepository stolenRepository;
+//     private final DeviceOwnershipRecordRepository deviceRepository;
 
-    public StolenDeviceServiceImpl(
-            StolenDeviceReportRepository stolenRepository,
-            DeviceOwnershipRecordRepository deviceRepository) {
+//     public StolenDeviceServiceImpl(
+//             StolenDeviceReportRepository stolenRepository,
+//             DeviceOwnershipRecordRepository deviceRepository) {
 
-        this.stolenRepository = stolenRepository;
-        this.deviceRepository = deviceRepository;
-    }
+//         this.stolenRepository = stolenRepository;
+//         this.deviceRepository = deviceRepository;
+//     }
 
-    @Override
-    public StolenDeviceReport reportStolen(StolenDeviceReport report) {
+//     @Override
+//     public StolenDeviceReport reportStolen(StolenDeviceReport report) {
 
-        DeviceOwnershipRecord device = deviceRepository
-                .findBySerialNumber(report.getSerialNumber())
-                .orElseThrow(() ->
-                        new NoSuchElementException("Device not found"));
+//         DeviceOwnershipRecord device = deviceRepository
+//                 .findBySerialNumber(report.getSerialNumber())
+//                 .orElseThrow(() ->
+//                         new NoSuchElementException("Device not found"));
 
-        report.setDevice(device);
+//         report.setDevice(device);
 
-        return stolenRepository.save(report);
-    }
+//         return stolenRepository.save(report);
+//     }
 
-    @Override
-    public List<StolenDeviceReport> getReportsBySerial(String serialNumber) {
-        return stolenRepository.findBySerialNumber(serialNumber);
-    }
+//     @Override
+//     public List<StolenDeviceReport> getReportsBySerial(String serialNumber) {
+//         return stolenRepository.findBySerialNumber(serialNumber);
+//     }
 
-    @Override
-    public Optional<StolenDeviceReport> getReportById(Long id) {
-        return stolenRepository.findById(id);
-    }
+//     @Override
+//     public Optional<StolenDeviceReport> getReportById(Long id) {
+//         return stolenRepository.findById(id);
+//     }
 
-    @Override
-    public List<StolenDeviceReport> getAllReports() {
-        return stolenRepository.findAll();
-    }
-}
+//     @Override
+//     public List<StolenDeviceReport> getAllReports() {
+//         return stolenRepository.findAll();
+//     }
+// }
