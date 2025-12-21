@@ -15,5 +15,6 @@ public interface FraudAlertService {
 
     List<FraudAlertRecord> getByClaim(Long claimId);
 
-    FraudAlertRecord resolve(Long id);   // 👈 ADD THIS
+    // 🔹 REQUIRED for /{id}/resolve
+    FraudAlertRecord resolve(Long id);
 }
