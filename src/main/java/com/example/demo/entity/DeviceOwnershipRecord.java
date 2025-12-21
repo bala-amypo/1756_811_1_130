@@ -1,85 +1,122 @@
-// package com.example.demo.entity;
+package com.example.demo.entity;
 
-// import jakarta.persistence.Entity;
-// import jakarta.persistence.GeneratedValue;
-// import jakarta.persistence.GenerationType;
-// import jakarta.persistence.Id;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
-// import java.util.*;
+import jakarta.persistence.*;
 
-// @Entity
-// public class DeviceOwnershipRecord{
+@Entity
+@Table(
+    name = "device_ownership_records",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = "serialNumber")
+    }
+)
+public class DeviceOwnershipRecord {
 
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//     private long id;
-//     @Column(unique=true)
-//     private String serialNumber;
-//     private String ownerName;
-//     private String ownerEmail;
-//     private LocalDate purchaseDate;
-//     private LocalDate warrantyExpiration;
-//     private Bool active;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-//     public DeviceOwnershipRecord(String serialNumber, String ownerName, String ownerEmail, LocalDate purchaseDate, LocalDate warrantyExpiration, Bool active ){
-//         this.id = id;
-//         this.serialNumber = serialNumber;
-//         this.ownerName = ownerName;
-//         this.ownerEmail = ownerEmail;
-//         this.purchaseDate = purchaseDate;
-//         this.warrantyExpiration  = warrantyExpiration;
-//         this.active = active;
-//     }
+    @Column(nullable = false, unique = true)
+    private String serialNumber;
 
-//     public DeviceOwnershipRecord(){
+    @Column(nullable = false)
+    private String ownerName;
 
-//     }
+    private String ownerEmail;
 
-//     public void setSerialNumber(String serialNumber){
-//         this.serialNumber = serialNumber;
-//     }
+    private LocalDate purchaseDate;
 
-//     public String getSerialNumber(){
-//         return this.serialNumber;
-//     }
+    @Column(nullable = false)
+    private LocalDate warrantyExpiration;
 
-//     public void setOwnerName(String ownerName){
-//         this.ownerName = ownerName;
-//     }
+    private Boolean active;
 
-//     public String getOwnerName(){
-//         return this.ownerNamer;
-//     }
+    private LocalDateTime createdAt;
 
-//     public void setOwnerEmail(String ownerEmail){
-//         this.ownerEmail = ownerEmail;
-//     }
 
-//     public String getOwnerEmail(){
-//         return this.ownerEmail;
-//     }
+    @OneToMany(mappedBy = "device")
+    private List<WarrantyClaimRecord> warrantyClaims;
 
-//     public void setPurchaseDate(LocalDate purchaseDate){
-//         this.purchaseDate = purchaseDate;
-//     }
+    @OneToMany(mappedBy = "device")
+    private List<StolenDeviceReport> stolenReports;
 
-//     public LocalDate getPurchaseDate(){
-//         return this.purchaseDate;
-//     }
+    public DeviceOwnershipRecord() {
+    }
 
-//     public void setWarrantyExpiration(LocalDate warrantyExpiration){
-//         this.warrantyExpiration = warrantyExpiration;
-//     }
+    public DeviceOwnershipRecord(String serialNumber,
+                                 String ownerName,
+                                 String ownerEmail,
+                                 LocalDate purchaseDate,
+                                 LocalDate warrantyExpiration) {
+        this.serialNumber = serialNumber;
+        this.ownerName = ownerName;
+        this.ownerEmail = ownerEmail;
+        this.purchaseDate = purchaseDate;
+        this.warrantyExpiration = warrantyExpiration;
+    }
 
-//     public LocalDate getWarrantyExpiration(){
-//         return this.warrantyExpiration;
-//     }
 
-//     public void setActive(Bool active){
-//         this.active = active;
-//     }
+    @PrePersist
+    public void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        if (this.active == null) {
+            this.active = true;
+        }
+    }
 
-//     public Bool getActive(){
-//         return this.active;
-//     }
-// }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
+
+    public LocalDate getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(LocalDate purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
+
+    public LocalDate getWarrantyExpiration() {
+        return warrantyExpiration;
+    }
+
+    public void setWarrantyExpiration(LocalDate warrantyExpiration) {
+        this.warrantyExpiration = warrantyExpiration;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+}
