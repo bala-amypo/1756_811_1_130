@@ -37,5 +37,21 @@ public class DeviceOwnershipRecord {
         this.createdAt = LocalDateTime.now();
     }
 
-    // getters and setters
+    // ===== REQUIRED GETTERS / SETTERS =====
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
