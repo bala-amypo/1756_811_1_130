@@ -54,4 +54,15 @@ public class DeviceOwnershipRecord {
     public void setId(Long id) {
         this.id = id;
     }
+
+    // getter for active
+public Boolean getActive() {
+    return active;
+}
+
+// setter for active
+public void setActive(Boolean active) {
+    this.active = active;
+}
+
 }
