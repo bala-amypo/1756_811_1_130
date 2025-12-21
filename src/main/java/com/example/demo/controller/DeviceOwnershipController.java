@@ -1,13 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.DeviceOwnershipRecord;
+import com.example.demo.model.DeviceOwnershipRecord;
 import com.example.demo.service.DeviceOwnershipService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/devices")
+@RequestMapping("/devices")
 public class DeviceOwnershipController {
 
     private final DeviceOwnershipService service;
@@ -16,41 +16,35 @@ public class DeviceOwnershipController {
         this.service = service;
     }
 
-    // POST /api/devices
+    // CREATE
     @PostMapping
-    public DeviceOwnershipRecord registerDevice(
-            @RequestBody DeviceOwnershipRecord device) {
-        return service.registerDevice(device);
+    public DeviceOwnershipRecord create(@RequestBody DeviceOwnershipRecord device) {
+        return service.save(device);
     }
 
-    // GET /api/devices
+    // READ ALL
     @GetMapping
-    public List<DeviceOwnershipRecord> getAllDevices() {
-        return service.getAllDevices();
+    public List<DeviceOwnershipRecord> getAll() {
+        return service.getAll();
     }
 
-    // GET /api/devices/{id}
+    // READ BY ID
     @GetMapping("/{id}")
-    public DeviceOwnershipRecord getDeviceById(@PathVariable Long id) {
-        return service.getById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Device not found"));
+    public DeviceOwnershipRecord getById(@PathVariable Long id) {
+        return service.getById(id);
     }
 
-    // GET /api/devices/serial/{serialNumber}
+    // ✅ READ BY SERIAL NUMBER
     @GetMapping("/serial/{serialNumber}")
-    public DeviceOwnershipRecord getDeviceBySerial(
-            @PathVariable String serialNumber) {
-        return service.getBySerial(serialNumber)
-                .orElseThrow(() ->
-                        new RuntimeException("Device not found"));
+    public DeviceOwnershipRecord getBySerial(@PathVariable String serialNumber) {
+        return service.getBySerial(serialNumber);
     }
 
-    // PUT /api/devices/{id}/status
+    // ✅ ACTIVATE / DEACTIVATE DEVICE
     @PutMapping("/{id}/status")
     public DeviceOwnershipRecord updateStatus(
             @PathVariable Long id,
             @RequestParam boolean active) {
-        return service.updateDeviceStatus(id, active);
+        return service.updateStatus(id, active);
     }
 }
