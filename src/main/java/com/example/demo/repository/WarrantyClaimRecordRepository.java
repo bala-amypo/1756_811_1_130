@@ -1,24 +1,24 @@
-package com.example.demo.repository;
+// package com.example.demo.repository;
 
-import com.example.demo.entity.WarrantyClaimRecord;
-import org.springframework.data.jpa.repository.JpaRepository;
+// import com.example.demo.entity.WarrantyClaimRecord;
+// import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-import java.util.Optional;
+// import java.util.List;
+// import java.util.Optional;
 
-public interface WarrantyClaimRecordRepository
-        extends JpaRepository<WarrantyClaimRecord, Long> {
+// public interface WarrantyClaimRecordRepository
+//         extends JpaRepository<WarrantyClaimRecord, Long> {
 
-    Optional<WarrantyClaimRecord> findById(Long id);
+//     Optional<WarrantyClaimRecord> findById(Long id);
 
-    List<WarrantyClaimRecord> findAll();
+//     List<WarrantyClaimRecord> findAll();
 
-    List<WarrantyClaimRecord> findBySerialNumber(String serialNumber);
+//     List<WarrantyClaimRecord> findBySerialNumber(String serialNumber);
 
-    boolean existsBySerialNumberAndClaimReason(
-            String serialNumber,
-            String claimReason
-    );
+//     boolean existsBySerialNumberAndClaimReason(
+//             String serialNumber,
+//             String claimReason
+//     );
 
-    List<WarrantyClaimRecord> findByStatus(String status);
-}
+//     List<WarrantyClaimRecord> findByStatus(String status);
+// }

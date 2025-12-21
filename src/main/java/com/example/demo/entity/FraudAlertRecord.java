@@ -1,58 +1,58 @@
-package com.example.demo.entity;
+// package com.example.demo.entity;
 
-import jakarta.persistence.*;
+// import jakarta.persistence.*;
 
-@Entity
-@Table(name = "fraud_alerts")
-public class FraudAlertRecord {
+// @Entity
+// @Table(name = "fraud_alerts")
+// public class FraudAlertRecord {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//     @Id
+//     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     private Long id;
 
-    private String alertType;
-    private String severity;
-    private boolean resolved;
+//     private String alertType;
+//     private String severity;
+//     private boolean resolved;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "warranty_claim_id", nullable = false)
-    private WarrantyClaimRecord claim;
+//     @ManyToOne(fetch = FetchType.LAZY)
+//     @JoinColumn(name = "warranty_claim_id", nullable = false)
+//     private WarrantyClaimRecord claim;
 
-    // -------- getters & setters --------
+//     // -------- getters & setters --------
 
-    public Long getId() {
-        return id;
-    }
+//     public Long getId() {
+//         return id;
+//     }
 
-    public String getAlertType() {
-        return alertType;
-    }
+//     public String getAlertType() {
+//         return alertType;
+//     }
 
-    public void setAlertType(String alertType) {
-        this.alertType = alertType;
-    }
+//     public void setAlertType(String alertType) {
+//         this.alertType = alertType;
+//     }
 
-    public String getSeverity() {
-        return severity;
-    }
+//     public String getSeverity() {
+//         return severity;
+//     }
 
-    public void setSeverity(String severity) {
-        this.severity = severity;
-    }
+//     public void setSeverity(String severity) {
+//         this.severity = severity;
+//     }
 
-    public boolean isResolved() {
-        return resolved;
-    }
+//     public boolean isResolved() {
+//         return resolved;
+//     }
 
-    public void setResolved(boolean resolved) {
-        this.resolved = resolved;
-    }
+//     public void setResolved(boolean resolved) {
+//         this.resolved = resolved;
+//     }
 
-    public WarrantyClaimRecord getClaim() {
-        return claim;
-    }
+//     public WarrantyClaimRecord getClaim() {
+//         return claim;
+//     }
 
-    public void setClaim(WarrantyClaimRecord claim) {
-        this.claim = claim;
-    }
-}
+//     public void setClaim(WarrantyClaimRecord claim) {
+//         this.claim = claim;
+//     }
+// }

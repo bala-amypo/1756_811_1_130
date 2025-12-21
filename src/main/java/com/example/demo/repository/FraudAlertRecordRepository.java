@@ -1,29 +1,29 @@
-package com.example.demo.repository;
+// package com.example.demo.repository;
 
-import java.util.List;
-import java.util.Optional;
+// import java.util.List;
+// import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.demo.entity.FraudAlertRecord;
+// import com.example.demo.entity.FraudAlertRecord;
 
-public interface FraudAlertRecordRepository
-        extends JpaRepository<FraudAlertRecord, Long> {
-
-    
-    @Override
-    Optional<FraudAlertRecord> findById(Long id);
+// public interface FraudAlertRecordRepository
+//         extends JpaRepository<FraudAlertRecord, Long> {
 
     
-    @Override
-    List<FraudAlertRecord> findAll();
+//     @Override
+//     Optional<FraudAlertRecord> findById(Long id);
 
     
-    List<FraudAlertRecord> findByClaimId(Long claimId);
+//     @Override
+//     List<FraudAlertRecord> findAll();
+
+    
+//     List<FraudAlertRecord> findByClaimId(Long claimId);
 
   
-    List<FraudAlertRecord> findBySerialNumber(String serialNumber);
+//     List<FraudAlertRecord> findBySerialNumber(String serialNumber);
 
 
-    List<FraudAlertRecord> findByResolved(Boolean resolved);
-}
+//     List<FraudAlertRecord> findByResolved(Boolean resolved);
+// }
