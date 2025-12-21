@@ -12,19 +12,16 @@ public class FraudAlertRecord {
 
     private String alertType;
     private String severity;
+    private boolean resolved;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "warranty_claim_id", nullable = false)
     private WarrantyClaimRecord claim;
 
-    // ---------- getters & setters ----------
+    // -------- getters & setters --------
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getAlertType() {
@@ -41,6 +38,14 @@ public class FraudAlertRecord {
 
     public void setSeverity(String severity) {
         this.severity = severity;
+    }
+
+    public boolean isResolved() {
+        return resolved;
+    }
+
+    public void setResolved(boolean resolved) {
+        this.resolved = resolved;
     }
 
     public WarrantyClaimRecord getClaim() {
