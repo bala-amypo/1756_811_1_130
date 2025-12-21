@@ -10,4 +10,9 @@ public interface DeviceOwnershipService {
     List<DeviceOwnershipRecord> getAll();
 
     DeviceOwnershipRecord getById(Long id);
+
+    DeviceOwnershipRecord getBySerial(String serialNumber);
+
+    DeviceOwnershipRecord updateStatus(Long id, boolean active);
+
 }
