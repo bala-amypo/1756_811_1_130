@@ -11,8 +11,13 @@ public class WarrantyClaimRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String claimNumber;
-    private String customerName;
+    private String serialNumber;
+    private String claimReason;
+    private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "device_id")
+    private DeviceOwnershipRecord device;
 
     @OneToMany(
         mappedBy = "claim",
@@ -21,30 +26,42 @@ public class WarrantyClaimRecord {
     )
     private List<FraudAlertRecord> fraudAlerts;
 
-    // ---------- getters & setters ----------
+    // -------- getters & setters --------
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getSerialNumber() {
+        return serialNumber;
     }
 
-    public String getClaimNumber() {
-        return claimNumber;
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
-    public void setClaimNumber(String claimNumber) {
-        this.claimNumber = claimNumber;
+    public String getClaimReason() {
+        return claimReason;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public void setClaimReason(String claimReason) {
+        this.claimReason = claimReason;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public DeviceOwnershipRecord getDevice() {
+        return device;
+    }
+
+    public void setDevice(DeviceOwnershipRecord device) {
+        this.device = device;
     }
 
     public List<FraudAlertRecord> getFraudAlerts() {
