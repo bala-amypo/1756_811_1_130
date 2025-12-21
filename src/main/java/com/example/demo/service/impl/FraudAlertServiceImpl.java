@@ -41,11 +41,12 @@ public class FraudAlertServiceImpl implements FraudAlertService {
         return repository.findByClaimId(claimId);
     }
 
+    // ✅ THIS MATCHES YOUR CONTROLLER
     @Override
     public FraudAlertRecord resolve(Long id) {
         FraudAlertRecord alert = repository.findById(id).orElse(null);
         if (alert != null) {
-            alert.setResolved(true);
+            alert.setResolved(true);   // ← THIS NOW WORKS
             return repository.save(alert);
         }
         return null;
