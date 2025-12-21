@@ -1,74 +1,74 @@
-// package com.example.demo.entity;
+package com.example.demo.entity;
 
-// import jakarta.persistence.*;
-// import java.util.List;
+import jakarta.persistence.*;
+import java.util.List;
 
-// @Entity
-// @Table(name = "warranty_claims")
-// public class WarrantyClaimRecord {
+@Entity
+@Table(name = "warranty_claims")
+public class WarrantyClaimRecord {
 
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//     private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-//     private String serialNumber;
-//     private String claimReason;
-//     private String status;
+    private String serialNumber;
+    private String claimReason;
+    private String status;
 
-//     @ManyToOne
-//     @JoinColumn(name = "device_id")
-//     private DeviceOwnershipRecord device;
+    @ManyToOne
+    @JoinColumn(name = "device_id")
+    private DeviceOwnershipRecord device;
 
-//     @OneToMany(
-//         mappedBy = "claim",
-//         cascade = CascadeType.ALL,
-//         orphanRemoval = true
-//     )
-//     private List<FraudAlertRecord> fraudAlerts;
+    @OneToMany(
+        mappedBy = "claim",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<FraudAlertRecord> fraudAlerts;
 
-//     // -------- getters & setters --------
+    // -------- getters & setters --------
 
-//     public Long getId() {
-//         return id;
-//     }
+    public Long getId() {
+        return id;
+    }
 
-//     public String getSerialNumber() {
-//         return serialNumber;
-//     }
+    public String getSerialNumber() {
+        return serialNumber;
+    }
 
-//     public void setSerialNumber(String serialNumber) {
-//         this.serialNumber = serialNumber;
-//     }
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
 
-//     public String getClaimReason() {
-//         return claimReason;
-//     }
+    public String getClaimReason() {
+        return claimReason;
+    }
 
-//     public void setClaimReason(String claimReason) {
-//         this.claimReason = claimReason;
-//     }
+    public void setClaimReason(String claimReason) {
+        this.claimReason = claimReason;
+    }
 
-//     public String getStatus() {
-//         return status;
-//     }
+    public String getStatus() {
+        return status;
+    }
 
-//     public void setStatus(String status) {
-//         this.status = status;
-//     }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-//     public DeviceOwnershipRecord getDevice() {
-//         return device;
-//     }
+    public DeviceOwnershipRecord getDevice() {
+        return device;
+    }
 
-//     public void setDevice(DeviceOwnershipRecord device) {
-//         this.device = device;
-//     }
+    public void setDevice(DeviceOwnershipRecord device) {
+        this.device = device;
+    }
 
-//     public List<FraudAlertRecord> getFraudAlerts() {
-//         return fraudAlerts;
-//     }
+    public List<FraudAlertRecord> getFraudAlerts() {
+        return fraudAlerts;
+    }
 
-//     public void setFraudAlerts(List<FraudAlertRecord> fraudAlerts) {
-//         this.fraudAlerts = fraudAlerts;
-//     }
-// }
+    public void setFraudAlerts(List<FraudAlertRecord> fraudAlerts) {
+        this.fraudAlerts = fraudAlerts;
+    }
+}
