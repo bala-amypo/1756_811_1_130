@@ -1,68 +1,157 @@
-// package com.example.demo.model;
+package com.example.demo.entity;
 
-// import jakarta.persistence.*;
-// import java.time.LocalDate;
-// import java.time.LocalDateTime;
-// import java.util.List;
+import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
-// @Entity
-// @Table(name = "device_ownership_records")
-// public class DeviceOwnershipRecord {
+@Entity
+@Table(
+    name = "device_ownership_records",
+    uniqueConstraints = @UniqueConstraint(columnNames = "serial_number")
+)
+public class DeviceOwnershipRecord {
 
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//     private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-//     @Column(unique = true)
-//     private String serialNumber;
+    @Column(name = "serial_number", nullable = false, unique = true)
+    private String serialNumber;
 
-//     private String ownerName;
-//     private String ownerEmail;
-//     private LocalDate purchaseDate;
-//     private LocalDate warrantyExpiration;
+    @Column(nullable = false)
+    private String ownerName;
 
-//     private Boolean active = true;
-//     private LocalDateTime createdAt;
+    private String ownerEmail;
 
-//     @OneToMany(mappedBy = "device")
-//     private List<WarrantyClaimRecord> claims;
+    private LocalDate purchaseDate;
 
-//     @OneToMany(mappedBy = "device")
-//     private List<StolenDeviceReport> stolenReports;
+    @Column(nullable = false)
+    private LocalDate warrantyExpiration;
 
-//     public DeviceOwnershipRecord() {}
+    @Column(nullable = false)
+    private Boolean active = true;
 
-//     @PrePersist
-//     public void onCreate() {
-//         this.createdAt = LocalDateTime.now();
-//     }
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
 
-//     // ===== REQUIRED GETTERS / SETTERS =====
+    // 🔹 Relationships
+    @OneToMany(mappedBy = "device")
+    private List<WarrantyClaimRecord> warrantyClaims;
 
-//     public Long getId() {
-//         return id;
-//     }
+    @OneToMany(mappedBy = "device")
+    private List<StolenDeviceReport> stolenReports;
 
-//     public String getSerialNumber() {
-//         return serialNumber;
-//     }
+    // 🔹 No-args constructor
+    public DeviceOwnershipRecord() {}
 
-//     public void setSerialNumber(String serialNumber) {
-//         this.serialNumber = serialNumber;
-//     }
+    // 🔹 Core fields constructor
+    public DeviceOwnershipRecord(
+            String serialNumber,
+            String ownerName,
+            String ownerEmail,
+            LocalDate purchaseDate,
+            LocalDate warrantyExpiration
+    ) {
+        this.serialNumber = serialNumber;
+        this.ownerName = ownerName;
+        this.ownerEmail = ownerEmail;
+        this.purchaseDate = purchaseDate;
+        this.warrantyExpiration = warrantyExpiration;
+        this.active = true;
+    }
 
-//     public void setId(Long id) {
-//         this.id = id;
-//     }
+    // 🔹 Auto timestamps & defaults
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        if (this.active == null) {
+            this.active = true;
+        }
+    }
 
-//     // getter for active
-// public Boolean getActive() {
-//     return active;
-// }
+    // -------- getters & setters --------
 
-// // setter for active
-// public void setActive(Boolean active) {
-//     this.active = active;
-// }
+    public Long getId() {
+        return id;
+    }
 
-// }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
+
+    public LocalDate getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(LocalDate purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
+
+    public LocalDate getWarrantyExpiration() {
+        return warrantyExpiration;
+    }
+
+    public void setWarrantyExpiration(LocalDate warrantyExpiration) {
+        this.warrantyExpiration = warrantyExpiration;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    // ✅ Recommended (safe for JPA & JSON)
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    // ✅ ADDED — relationship getters/setters
+
+    public List<WarrantyClaimRecord> getWarrantyClaims() {
+        return warrantyClaims;
+    }
+
+    public void setWarrantyClaims(List<WarrantyClaimRecord> warrantyClaims) {
+        this.warrantyClaims = warrantyClaims;
+    }
+
+    public List<StolenDeviceReport> getStolenReports() {
+        return stolenReports;
+    }
+
+    public void setStolenReports(List<StolenDeviceReport> stolenReports) {
+        this.stolenReports = stolenReports;
+    }
+}
