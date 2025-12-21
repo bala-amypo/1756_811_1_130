@@ -40,4 +40,14 @@ public class FraudAlertServiceImpl implements FraudAlertService {
     public List<FraudAlertRecord> getByClaim(Long claimId) {
         return repository.findByClaimId(claimId);
     }
+
+    @Override
+    public FraudAlertRecord resolve(Long id) {
+        FraudAlertRecord alert = repository.findById(id).orElse(null);
+        if (alert != null) {
+            alert.setResolved(true);
+            return repository.save(alert);
+        }
+        return null;
+    }
 }
