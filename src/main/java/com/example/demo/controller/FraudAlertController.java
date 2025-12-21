@@ -1,75 +1,57 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import java.util.List;
+import com.example.demo.entity.FraudAlertRecord;
+import com.example.demo.service.FraudAlertService;
+import org.springframework.web.bind.annotation.*;
 
-// import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PathVariable;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.PutMapping;
-// import org.springframework.web.bind.annotation.RequestBody;
-// import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
-// import com.example.demo.entity.FraudAlertRecord;
-// import com.example.demo.service.FraudAlertService;
+@RestController
+@RequestMapping("/api/fraud-alerts")
+public class FraudAlertController {
 
-// import io.swagger.v3.oas.annotations.tags.Tag;
+    private final FraudAlertService fraudAlertService;
 
-// @RestController
-// @RequestMapping("/api/fraud-alerts")
-// @Tag(name = "Fraud Alert")
-// public class FraudAlertController {
+    public FraudAlertController(FraudAlertService fraudAlertService) {
+        this.fraudAlertService = fraudAlertService;
+    }
 
-//     private final FraudAlertService fraudAlertService;
+    // POST /api/fraud-alerts (ADMIN)
+    @PostMapping
+    public FraudAlertRecord createAlert(
+            @RequestBody FraudAlertRecord alert) {
+        return fraudAlertService.createAlert(alert);
+    }
 
-    
-//     public FraudAlertController(FraudAlertService fraudAlertService) {
-//         this.fraudAlertService = fraudAlertService;
-//     }
+    // GET /api/fraud-alerts
+    @GetMapping
+    public List<FraudAlertRecord> getAllAlerts() {
+        return fraudAlertService.getAllAlerts();
+    }
 
+    // GET /api/fraud-alerts/{id}
+    @GetMapping("/{id}")
+    public FraudAlertRecord getAlertById(@PathVariable Long id) {
+        return fraudAlertService.resolveAlert(id);
+    }
 
-//     @PostMapping
-//     public ResponseEntity<FraudAlertRecord> createAlert(
-//             @RequestBody FraudAlertRecord alert) {
-//         return ResponseEntity.ok(fraudAlertService.createAlert(alert));
-//     }
+    // GET /api/fraud-alerts/serial/{serialNumber}
+    @GetMapping("/serial/{serialNumber}")
+    public List<FraudAlertRecord> getAlertsBySerial(
+            @PathVariable String serialNumber) {
+        return fraudAlertService.getAlertsBySerial(serialNumber);
+    }
 
+    // GET /api/fraud-alerts/claim/{claimId}
+    @GetMapping("/claim/{claimId}")
+    public List<FraudAlertRecord> getAlertsByClaim(
+            @PathVariable Long claimId) {
+        return fraudAlertService.getAlertsByClaim(claimId);
+    }
 
-//     @GetMapping
-//     public ResponseEntity<List<FraudAlertRecord>> getAllAlerts() {
-//         return ResponseEntity.ok(fraudAlertService.getAllAlerts());
-//     }
-
-   
-//     @GetMapping("/{id}")
-//     public ResponseEntity<FraudAlertRecord> getAlertById(
-//             @PathVariable Long id) {
-//         return ResponseEntity.ok(fraudAlertService.getAlertById(id));
-//     }
-
-
-//     @GetMapping("/serial/{serialNumber}")
-//     public ResponseEntity<List<FraudAlertRecord>> getAlertsBySerial(
-//             @PathVariable String serialNumber) {
-//         return ResponseEntity.ok(
-//                 fraudAlertService.getAlertsBySerial(serialNumber)
-//         );
-//     }
-
-
-//     @GetMapping("/claim/{claimId}")
-//     public ResponseEntity<List<FraudAlertRecord>> getAlertsByClaim(
-//             @PathVariable Long claimId) {
-//         return ResponseEntity.ok(
-//                 fraudAlertService.getAlertsByClaim(claimId)
-//         );
-//     }
-
-    
-//     @PutMapping("/{id}/resolve")
-//     public ResponseEntity<FraudAlertRecord> resolveAlert(
-//             @PathVariable Long id) {
-//         return ResponseEntity.ok(fraudAlertService.resolveAlert(id));
-//     }
-// }
+    // PUT /api/fraud-alerts/{id}/resolve (ADMIN)
+    @PutMapping("/{id}/resolve")
+    public FraudAlertRecord resolveAlert(@PathVariable Long id) {
+        return fraudAlertService.resolveAlert(id);
+    }
+}
