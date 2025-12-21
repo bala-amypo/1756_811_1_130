@@ -11,34 +11,39 @@ public class StolenDeviceReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // unique serial number
     @Column(unique = true)
     private String serialNumber;
 
     private String reportedBy;
     private String details;
-
     private LocalDateTime reportDate;
 
-    // MANY REPORTS → ONE DEVICE
     @ManyToOne
     @JoinColumn(name = "device_id")
     private DeviceOwnershipRecord device;
 
-    // no-args constructor
     public StolenDeviceReport() {}
 
-    // core fields constructor
-    public StolenDeviceReport(String serialNumber, String reportedBy) {
-        this.serialNumber = serialNumber;
-        this.reportedBy = reportedBy;
-    }
-
-    // auto timestamp
     @PrePersist
     public void onCreate() {
         this.reportDate = LocalDateTime.now();
     }
 
-    // getters and setters
+    // ===== REQUIRED GETTERS / SETTERS =====
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public void setDevice(DeviceOwnershipRecord device) {
+        this.device = device;
+    }
 }
