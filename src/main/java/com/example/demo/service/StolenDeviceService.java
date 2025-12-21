@@ -1,16 +1,16 @@
-package com.example.demo.service;
+// package com.example.demo.service;
 
-import com.example.demo.model.StolenDeviceReport;
+// import com.example.demo.model.StolenDeviceReport;
 
-import java.util.List;
+// import java.util.List;
 
-public interface StolenDeviceService {
+// public interface StolenDeviceService {
 
-    StolenDeviceReport save(StolenDeviceReport report);
+//     StolenDeviceReport save(StolenDeviceReport report);
 
-    List<StolenDeviceReport> getAll();
+//     List<StolenDeviceReport> getAll();
 
-    StolenDeviceReport getById(Long id);
+//     StolenDeviceReport getById(Long id);
 
-    List<StolenDeviceReport> getBySerial(String serialNumber);
-}
+//     List<StolenDeviceReport> getBySerial(String serialNumber);
+// }

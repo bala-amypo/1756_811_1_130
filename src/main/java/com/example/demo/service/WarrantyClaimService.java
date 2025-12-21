@@ -1,16 +1,16 @@
-package com.example.demo.service;
+// package com.example.demo.service;
 
-import com.example.demo.model.WarrantyClaimRecord;
+// import com.example.demo.model.WarrantyClaimRecord;
 
-import java.util.List;
+// import java.util.List;
 
-public interface WarrantyClaimService {
+// public interface WarrantyClaimService {
 
-    WarrantyClaimRecord save(WarrantyClaimRecord claim);
+//     WarrantyClaimRecord save(WarrantyClaimRecord claim);
 
-    List<WarrantyClaimRecord> getAll();
+//     List<WarrantyClaimRecord> getAll();
 
-    WarrantyClaimRecord getById(Long id);
+//     WarrantyClaimRecord getById(Long id);
 
-    List<WarrantyClaimRecord> getBySerial(String serialNumber);
-}
+//     List<WarrantyClaimRecord> getBySerial(String serialNumber);
+// }
