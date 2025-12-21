@@ -1,56 +1,153 @@
-// package com.example.demo.model;
+package com.example.demo.entity;
 
-// import jakarta.persistence.*;
-// import java.time.LocalDateTime;
-// import java.util.List;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
-// @Entity
-// @Table(name = "warranty_claim_records")
-// public class WarrantyClaimRecord {
+@Entity
+@Table(name = "warranty_claim_records")
+public class WarrantyClaimRecord {
 
-//     @Id
-//     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//     private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-//     private String serialNumber;
-//     private String claimantName;
-//     private String claimantEmail;
-//     private String claimReason;
+    @Column(nullable = false)
+    private String serialNumber;
 
-//     private String status = "PENDING";
-//     private LocalDateTime submittedAt;
-//     private LocalDateTime createdAt;
+    @Column(nullable = false)
+    private String claimantName;
 
-//     @ManyToOne
-//     @JoinColumn(name = "device_id")
-//     private DeviceOwnershipRecord device;
+    private String claimantEmail;
 
-//     @OneToMany(mappedBy = "claim")
-//     private List<FraudAlertRecord> alerts;
+    @Column(nullable = false)
+    private String claimReason;
 
-//     public WarrantyClaimRecord() {}
+    @Column(name = "submitted_at", updatable = false)
+    private LocalDateTime submittedAt;
 
-//     @PrePersist
-//     public void onCreate() {
-//         this.submittedAt = LocalDateTime.now();
-//         this.createdAt = LocalDateTime.now();
-//     }
+    @Column(nullable = false)
+    private String status = "PENDING";
 
-//     // ===== REQUIRED GETTERS / SETTERS =====
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
 
-//     public Long getId() {
-//         return id;
-//     }
+    // 🔹 Relationships
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "device_id", nullable = false)
+    private DeviceOwnershipRecord device;
 
-//     public String getSerialNumber() {
-//         return serialNumber;
-//     }
+    @OneToMany(mappedBy = "claim")
+    private List<FraudAlertRecord> fraudAlerts;
 
-//     public void setSerialNumber(String serialNumber) {
-//         this.serialNumber = serialNumber;
-//     }
+    // 🔹 No-args constructor
+    public WarrantyClaimRecord() {}
 
-//     public void setDevice(DeviceOwnershipRecord device) {
-//         this.device = device;
-//     }
-// }
+    // 🔹 Core fields constructor
+    public WarrantyClaimRecord(
+            String serialNumber,
+            String claimantName,
+            String claimantEmail,
+            String claimReason
+    ) {
+        this.serialNumber = serialNumber;
+        this.claimantName = claimantName;
+        this.claimantEmail = claimantEmail;
+        this.claimReason = claimReason;
+        this.status = "PENDING";
+    }
+
+    // 🔹 Auto timestamps
+    @PrePersist
+    protected void onCreate() {
+        this.submittedAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+        if (this.status == null) {
+            this.status = "PENDING";
+        }
+    }
+
+    // -------- getters & setters --------
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public String getClaimantName() {
+        return claimantName;
+    }
+
+    public void setClaimantName(String claimantName) {
+        this.claimantName = claimantName;
+    }
+
+    public String getClaimantEmail() {
+        return claimantEmail;
+    }
+
+    public void setClaimantEmail(String claimantEmail) {
+        this.claimantEmail = claimantEmail;
+    }
+
+    public String getClaimReason() {
+        return claimReason;
+    }
+
+    public void setClaimReason(String claimReason) {
+        this.claimReason = claimReason;
+    }
+
+    public LocalDateTime getSubmittedAt() {
+        return submittedAt;
+    }
+
+    // ✅ ADDED
+    public void setSubmittedAt(LocalDateTime submittedAt) {
+        this.submittedAt = submittedAt;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    // ✅ ADDED
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public DeviceOwnershipRecord getDevice() {
+        return device;
+    }
+
+    public void setDevice(DeviceOwnershipRecord device) {
+        this.device = device;
+    }
+
+    public List<FraudAlertRecord> getFraudAlerts() {
+        return fraudAlerts;
+    }
+
+    public void setFraudAlerts(List<FraudAlertRecord> fraudAlerts) {
+        this.fraudAlerts = fraudAlerts;
+    }
+}
