@@ -1,62 +1,49 @@
-// package com.example.demo.service.impl;
+package com.example.demo.service.impl;
 
-// import java.util.List;
-// import java.util.NoSuchElementException;
+import com.example.demo.entity.FraudAlertRecord;
+import com.example.demo.repository.FraudAlertRecordRepository;
+import com.example.demo.service.FraudAlertService;
+import org.springframework.stereotype.Service;
 
-// import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.NoSuchElementException;
 
-// import com.example.demo.entity.FraudAlertRecord;
-// import com.example.demo.repository.FraudAlertRecordRepository;
-// import com.example.demo.service.FraudAlertService;
+@Service
+public class FraudAlertServiceImpl implements FraudAlertService {
 
-// @Service
-// public class FraudAlertServiceImpl implements FraudAlertService {
+    private final FraudAlertRecordRepository repository;
 
-//     private final FraudAlertRecordRepository fraudAlertRepository;
+    public FraudAlertServiceImpl(FraudAlertRecordRepository repository) {
+        this.repository = repository;
+    }
 
-    
-//     public FraudAlertServiceImpl(FraudAlertRecordRepository fraudAlertRepository) {
-//         this.fraudAlertRepository = fraudAlertRepository;
-//     }
+    @Override
+    public FraudAlertRecord createAlert(FraudAlertRecord alert) {
+        return repository.save(alert);
+    }
 
+    @Override
+    public FraudAlertRecord resolveAlert(Long id) {
+        FraudAlertRecord alert = repository.findById(id)
+                .orElseThrow(() ->
+                        new NoSuchElementException("Request not found"));
 
-//     @Override
-//     public FraudAlertRecord createAlert(FraudAlertRecord alert) {
-//         return fraudAlertRepository.save(alert);
-//     }
+        alert.setResolved(true);
+        return repository.save(alert);
+    }
 
+    @Override
+    public List<FraudAlertRecord> getAlertsBySerial(String serialNumber) {
+        return repository.findBySerialNumber(serialNumber);
+    }
 
-//     @Override
-//     public FraudAlertRecord getAlertById(Long id) {
-//     return fraudAlertRepository.findById(id)
-//             .orElseThrow(() -> new NoSuchElementException("Request not found"));
-//     }
+    @Override
+    public List<FraudAlertRecord> getAlertsByClaim(Long claimId) {
+        return repository.findByClaimId(claimId);
+    }
 
-
-//     @Override
-//     public FraudAlertRecord resolveAlert(Long id) {
-//         FraudAlertRecord alert = fraudAlertRepository.findById(id)
-//                 .orElseThrow(() -> new NoSuchElementException("Request not found"));
-
-//         alert.setResolved(true);
-//         return fraudAlertRepository.save(alert);
-//     }
-
-
-//     @Override
-//     public List<FraudAlertRecord> getAlertsBySerial(String serialNumber) {
-//         return fraudAlertRepository.findBySerialNumber(serialNumber);
-//     }
-
-
-//     @Override
-//     public List<FraudAlertRecord> getAlertsByClaim(Long claimId) {
-//         return fraudAlertRepository.findByClaimId(claimId);
-//     }
-
-
-//     @Override
-//     public List<FraudAlertRecord> getAllAlerts() {
-//         return fraudAlertRepository.findAll();
-//     }
-// }
+    @Override
+    public List<FraudAlertRecord> getAllAlerts() {
+        return repository.findAll();
+    }
+}
