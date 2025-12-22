@@ -54,7 +54,7 @@ public class FraudRule {
         return id;
     }
 
-    // ✅ Added (important for updates & JSON mapping)
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -95,7 +95,7 @@ public class FraudRule {
         return createdAt;
     }
 
-    // ✅ Added (safe, optional but recommended)
+
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }

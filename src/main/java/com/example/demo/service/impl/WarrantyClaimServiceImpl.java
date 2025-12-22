@@ -42,17 +42,17 @@ public class WarrantyClaimServiceImpl implements WarrantyClaimService {
 
         boolean flagged = false;
 
-        // 🔹 Check stolen
+
         if (stolenRepository.existsBySerialNumber(claim.getSerialNumber())) {
             flagged = true;
         }
 
-        // 🔹 Check warranty expiry
+
         if (device.getWarrantyExpiration().isBefore(LocalDate.now())) {
             flagged = true;
         }
 
-        // 🔹 Check duplicate claim
+
         if (claimRepository.existsBySerialNumberAndClaimReason(
                 claim.getSerialNumber(),
                 claim.getClaimReason()

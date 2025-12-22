@@ -32,7 +32,7 @@ public class WarrantyClaimRecord {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
-    // 🔹 Relationships
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "device_id", nullable = false)
     private DeviceOwnershipRecord device;
@@ -40,10 +40,10 @@ public class WarrantyClaimRecord {
     @OneToMany(mappedBy = "claim")
     private List<FraudAlertRecord> fraudAlerts;
 
-    // 🔹 No-args constructor
+
     public WarrantyClaimRecord() {}
 
-    // 🔹 Core fields constructor
+
     public WarrantyClaimRecord(
             String serialNumber,
             String claimantName,
@@ -57,7 +57,7 @@ public class WarrantyClaimRecord {
         this.status = "PENDING";
     }
 
-    // 🔹 Auto timestamps
+
     @PrePersist
     protected void onCreate() {
         this.submittedAt = LocalDateTime.now();
@@ -67,7 +67,7 @@ public class WarrantyClaimRecord {
         }
     }
 
-    // -------- getters & setters --------
+
 
     public Long getId() {
         return id;
@@ -113,7 +113,7 @@ public class WarrantyClaimRecord {
         return submittedAt;
     }
 
-    // ✅ ADDED
+
     public void setSubmittedAt(LocalDateTime submittedAt) {
         this.submittedAt = submittedAt;
     }
@@ -122,7 +122,7 @@ public class WarrantyClaimRecord {
         return createdAt;
     }
 
-    // ✅ ADDED
+
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
