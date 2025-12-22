@@ -16,7 +16,7 @@ public class DeviceOwnershipController {
         this.service = service;
     }
 
-    // 🔒 ADMIN (security added later)
+    
     @PostMapping
     public DeviceOwnershipRecord registerDevice(
             @RequestBody DeviceOwnershipRecord device
@@ -46,7 +46,7 @@ public class DeviceOwnershipController {
                 .orElseThrow(() -> new RuntimeException("Device not found"));
     }
 
-    // 🔒 ADMIN
+   
     @PutMapping("/{id}/status")
     public DeviceOwnershipRecord updateStatus(
             @PathVariable Long id,

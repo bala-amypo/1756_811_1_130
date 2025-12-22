@@ -22,28 +22,28 @@ public class StolenDeviceReport {
 
     private String details;
 
-    // 🔹 Relationship
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "device_id", nullable = false)
     private DeviceOwnershipRecord device;
 
-    // 🔹 No-args constructor
+   
     public StolenDeviceReport() {}
 
-    // 🔹 Core fields constructor
+
     public StolenDeviceReport(String serialNumber, String reportedBy, String details) {
         this.serialNumber = serialNumber;
         this.reportedBy = reportedBy;
         this.details = details;
     }
 
-    // 🔹 Auto timestamp
+    
     @PrePersist
     protected void onCreate() {
         this.reportDate = LocalDateTime.now();
     }
 
-    // -------- getters & setters --------
+ 
 
     public Long getId() {
         return id;
