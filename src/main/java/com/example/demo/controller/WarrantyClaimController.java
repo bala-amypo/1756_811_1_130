@@ -41,7 +41,7 @@ public class WarrantyClaimController {
         return service.getClaimsBySerial(serialNumber);
     }
 
-    // 🔒 ADMIN (later)
+ 
     @PutMapping("/{id}/status")
     public WarrantyClaimRecord updateStatus(
             @PathVariable Long id,

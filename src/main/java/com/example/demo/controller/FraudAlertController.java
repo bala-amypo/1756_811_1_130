@@ -22,11 +22,11 @@ public class FraudAlertController {
         this.warrantyClaimService = warrantyClaimService;
     }
 
-    // 🔒 ADMIN (security later)
+ 
     @PostMapping
     public FraudAlertRecord createAlert(@RequestBody FraudAlertRecord alert) {
 
-        // Validate claim exists and attach it
+
         alert.setClaim(
                 warrantyClaimService.getClaimById(alert.getClaimId())
                         .orElseThrow(() -> new RuntimeException("Claim not found"))
@@ -63,7 +63,7 @@ public class FraudAlertController {
         return fraudAlertService.getAlertsByClaim(claimId);
     }
 
-    // 🔒 ADMIN
+ 
     @PutMapping("/{id}/resolve")
     public FraudAlertRecord resolveAlert(@PathVariable Long id) {
         return fraudAlertService.resolveAlert(id);

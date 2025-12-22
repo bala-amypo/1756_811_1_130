@@ -16,7 +16,7 @@ public class FraudRuleController {
         this.service = service;
     }
 
-    // 🔒 ADMIN (security can be added later)
+
     @PostMapping
     public FraudRule createRule(@RequestBody FraudRule rule) {
         return service.createRule(rule);
@@ -41,7 +41,7 @@ public class FraudRuleController {
         return service.getActiveRules();
     }
 
-    // 🔒 ADMIN
+
     @PutMapping("/{id}")
     public FraudRule updateRule(
             @PathVariable Long id,

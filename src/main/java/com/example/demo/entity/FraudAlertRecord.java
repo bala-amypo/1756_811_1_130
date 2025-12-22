@@ -11,7 +11,7 @@ public class FraudAlertRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Redundant but useful for fast queries
+
     @Column(nullable = false)
     private Long claimId;
 
@@ -22,7 +22,7 @@ public class FraudAlertRecord {
     private String alertType;
 
     @Column(nullable = false)
-    private String severity; // LOW / MEDIUM / HIGH / CRITICAL
+    private String severity; 
 
     private String message;
 
@@ -32,15 +32,15 @@ public class FraudAlertRecord {
     @Column(nullable = false)
     private Boolean resolved = false;
 
-    // 🔹 Relationship (User intentionally skipped for now)
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "claim_ref_id", nullable = false)
     private WarrantyClaimRecord claim;
 
-    // 🔹 No-args constructor
+
     public FraudAlertRecord() {}
 
-    // 🔹 Core fields constructor
+
     public FraudAlertRecord(
             Long claimId,
             String serialNumber,
@@ -56,7 +56,7 @@ public class FraudAlertRecord {
         this.resolved = false;
     }
 
-    // 🔹 Auto timestamp
+
     @PrePersist
     protected void onCreate() {
         this.alertDate = LocalDateTime.now();
@@ -65,7 +65,7 @@ public class FraudAlertRecord {
         }
     }
 
-    // -------- getters & setters --------
+    
 
     public Long getId() {
         return id;

@@ -28,10 +28,10 @@ public class FraudRule {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
-    // 🔹 No-args constructor
+
     public FraudRule() {}
 
-    // 🔹 Core fields constructor
+ 
     public FraudRule(String ruleCode, String ruleType, String description) {
         this.ruleCode = ruleCode;
         this.ruleType = ruleType;
@@ -39,7 +39,7 @@ public class FraudRule {
         this.active = true;
     }
 
-    // 🔹 Auto-populate createdAt
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
@@ -48,7 +48,7 @@ public class FraudRule {
         }
     }
 
-    // -------- getters & setters --------
+
 
     public Long getId() {
         return id;

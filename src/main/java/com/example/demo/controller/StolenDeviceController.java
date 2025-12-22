@@ -16,7 +16,7 @@ public class StolenDeviceController {
         this.service = service;
     }
 
-    // 🔒 ADMIN (security later)
+
     @PostMapping
     public StolenDeviceReport reportStolen(
             @RequestBody StolenDeviceReport report
