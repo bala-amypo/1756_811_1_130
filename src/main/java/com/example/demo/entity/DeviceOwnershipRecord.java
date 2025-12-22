@@ -35,17 +35,17 @@ public class DeviceOwnershipRecord {
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
-    // 🔹 Relationships
+
     @OneToMany(mappedBy = "device")
     private List<WarrantyClaimRecord> warrantyClaims;
 
     @OneToMany(mappedBy = "device")
     private List<StolenDeviceReport> stolenReports;
 
-    // 🔹 No-args constructor
+   
     public DeviceOwnershipRecord() {}
 
-    // 🔹 Core fields constructor
+
     public DeviceOwnershipRecord(
             String serialNumber,
             String ownerName,
@@ -61,7 +61,7 @@ public class DeviceOwnershipRecord {
         this.active = true;
     }
 
-    // 🔹 Auto timestamps & defaults
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
@@ -70,7 +70,7 @@ public class DeviceOwnershipRecord {
         }
     }
 
-    // -------- getters & setters --------
+ 
 
     public Long getId() {
         return id;
@@ -132,12 +132,12 @@ public class DeviceOwnershipRecord {
         return createdAt;
     }
 
-    // ✅ Recommended (safe for JPA & JSON)
+    
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    // ✅ ADDED — relationship getters/setters
+   
 
     public List<WarrantyClaimRecord> getWarrantyClaims() {
         return warrantyClaims;
