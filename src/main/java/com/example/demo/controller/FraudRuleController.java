@@ -50,4 +50,3 @@ public class FraudRuleController {
         return service.updateRule(id, rule);
     }
 }
-
